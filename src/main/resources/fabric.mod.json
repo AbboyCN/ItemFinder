@@ -3,15 +3,15 @@
 	"id": "itemfinder",
 	"version": "${version}",
 	"name": "ItemFinder",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "不要再在全物品里迷路啦~",
 	"authors": [
-		"Me!"
+		"Ab_boy_CN"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/itemfinder/icon.png",
 	"environment": "*",
 	"entrypoints": {
