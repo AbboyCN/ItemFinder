@@ -1,0 +1,12 @@
+{
+  "minecraft:diamond": {
+    "x": 120,
+    "y": 64,
+    "z": -300
+  },
+  "minecraft:emerald": {
+    "x": -45,
+    "y": 32,
+    "z": 200
+  }
+}
