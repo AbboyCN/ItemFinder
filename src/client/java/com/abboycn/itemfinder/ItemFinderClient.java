@@ -8,7 +8,7 @@ import com.abboycn.itemfinder.commands.cmdFindItem;
 public class ItemFinderClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-
-		ClientCommandRegistrationCallback.EVENT.register((dispatcher,registryAccess)->cmdFindItem.register(dispatcher));
+		//注册命令
+		ClientCommandRegistrationCallback.EVENT.register((dispatcher,registryAccess)->cmdFindItem.register(dispatcher,registryAccess));
 	}
 }
