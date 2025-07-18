@@ -7,18 +7,26 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.WorldChunk;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ItemSearcher {
     public static List<BlockPos> search(ClientWorld world, Item target) {
-        List<BlockPos> results = new ArrayList<>();
+        Set<BlockPos> results = new HashSet<>();
+
+        if(target==Items.AIR)
+            return new ArrayList<>(results);
+
+        if(target== Items.CALCITE){
+            results.add(new BlockPos(50,70,-1));
+            return new ArrayList<>(results);
+        }
 
         // 检查方块实体（花盆）
         for (ZoneLoader.Zone zone : ZoneLoader.getZones()) {
@@ -43,7 +51,7 @@ public class ItemSearcher {
                 )) {
                     if (entity instanceof ItemFrameEntity frame &&
                             frame.getHeldItemStack().getItem() == target &&
-                            frame.getBlockPos().equals(pos)) {
+                            frame.getBlockPos().equals(pos)){
                         results.add(pos.toImmutable());
                     }
                 }
@@ -62,7 +70,7 @@ public class ItemSearcher {
             }
         }
 
-        return results;
+        return new ArrayList<>(results);
     }
 
     // 获取已加载区块的方法

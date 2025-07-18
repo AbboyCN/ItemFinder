@@ -9,6 +9,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.ItemStackArgumentType;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -22,8 +23,6 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.arg
 
 public class cmdFindItem {
 
-    private static final Map<Identifier, BlockPos> ITEM_POSITIONS = new HashMap<>();
-
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher,CommandRegistryAccess registryAccess){
         dispatcher.register(ClientCommandManager.literal("finditem")
                         .then(argument("itemID", ItemStackArgumentType.itemStack(registryAccess))
@@ -35,6 +34,10 @@ public class cmdFindItem {
             return 0;
         if(!(player.getWorld().getRegistryKey() == World.OVERWORLD)){
             player.sendMessage(Text.literal("§c维度\"minecraft:overworld\"未在客户端加载"),false);
+            return 0;
+        }
+        if(target== Items.AIR){
+            player.sendMessage(Text.literal("§c你可以按下Alt+F4退出游戏,谁闲的没事通过崩端退游戏啊?!"),false);
             return 0;
         }
         List<BlockPos> found = ItemSearcher.search(player.clientWorld, target);
@@ -53,6 +56,5 @@ public class cmdFindItem {
                 ), false)
         );
         return 1;
-        //return 0;
     }
 }
