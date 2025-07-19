@@ -11,13 +11,10 @@ import net.minecraft.command.argument.ItemStackArgumentType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
 

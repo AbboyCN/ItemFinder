@@ -3,7 +3,7 @@
 	"id": "itemfinder",
 	"version": "${version}",
 	"name": "ItemFinder",
-	"description": "不要再在全物品里迷路啦~",
+	"description": "不要再在全物品里迷路啦~(TTS专用)",
 	"authors": [
 		"Ab_boy_CN"
 	],
@@ -33,7 +33,7 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.16.14",
+		"fabricloader": ">=0.16.10",
 		"minecraft": "~1.21.4",
 		"java": ">=21",
 		"fabric-api": "*"
