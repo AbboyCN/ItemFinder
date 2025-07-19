@@ -2,14 +2,14 @@ package com.abboycn.itemfinder.searcher;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.client.MinecraftClient;
+//import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.WorldChunk;
+//import net.minecraft.world.chunk.WorldChunk;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,9 +20,11 @@ public class ItemSearcher {
     public static List<BlockPos> search(ClientWorld world, Item target) {
         Set<BlockPos> results = new HashSet<>();
 
+        //空气：第二重保险
         if(target==Items.AIR)
             return new ArrayList<>(results);
 
+        //方解石
         if(target== Items.CALCITE){
             results.add(new BlockPos(50,70,-1));
             return new ArrayList<>(results);
@@ -71,25 +73,5 @@ public class ItemSearcher {
         }
 
         return new ArrayList<>(results);
-    }
-
-    // 获取已加载区块的方法
-    private static List<WorldChunk> getLoadedChunks(ClientWorld world) {
-        List<WorldChunk> chunks = new ArrayList<>();
-        int viewDist = MinecraftClient.getInstance().options.getViewDistance().getValue();
-        BlockPos center = MinecraftClient.getInstance().player.getBlockPos();
-
-        for (int x = -viewDist; x <= viewDist; x++) {
-            for (int z = -viewDist; z <= viewDist; z++) {
-                WorldChunk chunk = world.getChunk(
-                        (center.getX() >> 4) + x,
-                        (center.getZ() >> 4) + z
-                );
-                if (chunk != null) {
-                    chunks.add(chunk);
-                }
-            }
-        }
-        return chunks;
     }
 }

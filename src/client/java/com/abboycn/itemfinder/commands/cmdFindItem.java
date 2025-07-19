@@ -11,6 +11,7 @@ import net.minecraft.command.argument.ItemStackArgumentType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
+import net.minecraft.util.Colors;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -42,16 +43,50 @@ public class cmdFindItem {
             player.sendMessage(Text.literal("§c无法找到物品\"" + target.getName().getString() + "\"的位置信息"), false);
             return 0;
         }
+        // 发送结果 & 修订位置
+        List<BlockPos> foundModified = new java.util.ArrayList<>(List.of());
+        player.sendMessage(Text.literal("§a找到 §e" + target.getName().getString() + "§a 位于：§b("+ found.size() + ")"), false);
+        for (BlockPos pos : found) {
+            posSender(player, directionJudge(pos), pos);
+            foundModified.add(posModifier(pos));
+        }
         // 更新光柱
-        beamRender.addBeams(found);
-        // 发送结果
-        player.sendMessage(Text.literal("§a物品 §e" + target.getName().getString() + "§a 位于：§b("+ found.size() + ")"), false);
-        found.forEach(pos ->
-                player.sendMessage(Text.literal(
-                        String.format("§7- §f[%d, %d, %d]",
-                                pos.getX(), pos.getY(), pos.getZ())
-                ), false)
-        );
+        beamRender.addBeams(foundModified);
         return 1;
+    }
+
+    private static String directionJudge(BlockPos pos){
+        if(pos.getZ()>=37)
+            return "南区(Z+) ";
+        else if(pos.getZ()<=7)
+            return "北区(Z-) ";
+        else if(pos.getX()>=71)
+            return "大宗(X+) ";
+        else if(pos.getZ()==29)
+            return "常用物品处(四大金刚) ";
+        else if(pos.getZ()==15)
+            return "不可堆叠分类区";
+        else return "";
+    }
+
+    private static BlockPos posModifier(BlockPos pos){
+        if(pos.getX()==59)
+            pos = new BlockPos(58,pos.getY(),pos.getZ());
+        else if(pos.getZ()==47)
+            pos = new BlockPos(48,pos.getY(),pos.getZ());
+        else if(pos.getZ()==26)
+            pos = new BlockPos(pos.getX(),pos.getY(),25);
+        else if(pos.getZ()==18)
+            pos = new BlockPos(pos.getX(),pos.getY(),19);
+        return pos;
+    }
+
+    private static void posSender(ClientPlayerEntity player,String direction,BlockPos pos){
+        player.sendMessage(Text.literal(String.format("§7- §d%s§f[%d, %d, %d]",
+                direction,
+                pos.getX(),
+                pos.getY(),
+                pos.getZ()
+        )), false);
     }
 }
