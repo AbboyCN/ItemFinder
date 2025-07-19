@@ -7,6 +7,11 @@
 	"authors": [
 		"Ab_boy_CN"
 	],
+	"contributors": [
+		"Nk_YMZ",
+		"S12004186",
+		"moyuing"
+	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"

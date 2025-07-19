@@ -11,7 +11,6 @@ import net.minecraft.command.argument.ItemStackArgumentType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
-import net.minecraft.util.Colors;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -41,6 +40,7 @@ public class cmdFindItem {
         List<BlockPos> found = ItemSearcher.search(player.clientWorld, target);
         if(found.isEmpty()) {
             player.sendMessage(Text.literal("§c无法找到物品\"" + target.getName().getString() + "\"的位置信息"), false);
+            player.sendMessage(Text.literal("§6你可以尝试在\"其他不可堆叠分类物品区域\"查找 [24,67,15])"),false);
             return 0;
         }
         // 发送结果 & 修订位置

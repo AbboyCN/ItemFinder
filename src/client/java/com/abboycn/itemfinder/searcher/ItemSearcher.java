@@ -2,14 +2,14 @@ package com.abboycn.itemfinder.searcher;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowerPotBlock;
-//import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-//import net.minecraft.world.chunk.WorldChunk;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -72,6 +72,21 @@ public class ItemSearcher {
             }
         }
 
+        BlockPos pos = UnstackableItemSearcher.findPositionForUnstackableItem(target);
+        if(pos!=null)
+            results.add(pos.toImmutable());
+
         return new ArrayList<>(results);
+    }
+
+    public static class UnstackableItemSearcher {
+        public static BlockPos findPositionForUnstackableItem(Item target) {
+            // 获取物品的ID字符串
+            Identifier targetItemId = Registries.ITEM.getId(target);
+            String targetIdString = targetItemId.toString();
+
+            // 查找对应的位置
+            return ItemLoaderUnstackable.findPositionForUnstackableItem(targetIdString);
+        }
     }
 }
