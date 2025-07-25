@@ -22,7 +22,7 @@ public class cmdFindItem {
 
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher,CommandRegistryAccess registryAccess){
         dispatcher.register(ClientCommandManager.literal("finditem")
-                        .then(argument("itemID", ItemStackArgumentType.itemStack(registryAccess))
+                .then(argument("itemID", ItemStackArgumentType.itemStack(registryAccess))
                         .executes(c -> cmdFindItemExecuter(c.getSource().getPlayer(),ItemStackArgumentType.getItemStackArgument(c,"itemID").getItem()))));
     }
 
@@ -31,6 +31,10 @@ public class cmdFindItem {
             return 0;
         if(!(player.getWorld().getRegistryKey() == World.OVERWORLD)){
             player.sendMessage(Text.literal("§c维度\"minecraft:overworld\"未在客户端加载"),false);
+            return 0;
+        }
+        if(target==null){
+            player.sendMessage(Text.literal("§c错误的命令参数:\"ItemID:null\""),false);
             return 0;
         }
         if(target== Items.AIR){

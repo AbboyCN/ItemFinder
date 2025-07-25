@@ -12,7 +12,7 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.arg
 public class cmdFI {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess registryAccess){
         dispatcher.register(ClientCommandManager.literal("fi")
-                        .then(argument("itemID", ItemStackArgumentType.itemStack(registryAccess))
+                .then(argument("itemID", ItemStackArgumentType.itemStack(registryAccess))
                         .executes(c -> cmdFindItemExecuter(c.getSource().getPlayer(),ItemStackArgumentType.getItemStackArgument(c,"itemID").getItem()))));
     }
 }
