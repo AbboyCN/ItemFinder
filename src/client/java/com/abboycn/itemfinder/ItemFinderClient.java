@@ -34,6 +34,8 @@ public class ItemFinderClient implements ClientModInitializer {
 														  registryAccess)->cmdFI.register(dispatcher,registryAccess));
 		ClientCommandRegistrationCallback.EVENT.register((dispatcher,
 														  registryAccess)->cmdFindItemName.register(dispatcher,registryAccess));
+		ClientCommandRegistrationCallback.EVENT.register((dispatcher,
+														  registryAccess)->cmdFN.register(dispatcher,registryAccess));
 		// 注册光柱渲染器(每刻渲染光柱)
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (client.world != null) {
