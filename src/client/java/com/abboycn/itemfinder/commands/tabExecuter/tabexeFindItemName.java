@@ -14,14 +14,10 @@ public class tabexeFindItemName {
         List<String> options = ItemNameMapLoader.getItemNameTabList();
 
         for (String option : options) {
-            if (option.toLowerCase().contains(input)&&!matchIgnoreQM(input,option.toLowerCase())) { // 如果选项包含输入内容
+            if (option.toLowerCase().contains(input)) { // 如果选项包含输入内容
                 builder.suggest(option); // 加入补全建议
             }
         }
         return builder.buildFuture();
-    }
-
-    public static boolean matchIgnoreQM(String target,String expectation){
-        return target.equals(expectation) || String.format("\"%s\"", target).equals(expectation) || String.format("%s\"", target).equals(expectation);
     }
 }
