@@ -10,9 +10,9 @@ public class ItemNameMapLoader {
     public static final Map<String, Item> itemMap = new HashMap<>();
 
     public static void load(){
+        itemMap.clear();
         for(Item item: Registries.ITEM){
             itemMap.put(item.getName().getString(),item);
-            System.out.println(item.getName().getString());
         }
     }
 
