@@ -16,7 +16,7 @@ public class ItemNameMapLoader {
         itemMap.clear();
         for(Item item: Registries.ITEM){
             itemMap.put(item.getName().getString(),item);
-            itemNameTabList.add("\""+item.getName().getString()+"\"");
+            itemNameTabList.add(item.getName().getString());
         }
     }
 

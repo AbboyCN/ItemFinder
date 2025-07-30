@@ -13,7 +13,7 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.arg
 public class cmdFN {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess registryAccess){
         dispatcher.register(ClientCommandManager.literal("fn")
-                .then(argument("itemName", StringArgumentType.string())
+                .then(argument("itemName", StringArgumentType.greedyString())
                         .suggests((context,builder)-> tabexeFindItemName.fuzzySuggest(builder))
                         .executes(c -> cmdFindItemNameExecuter(c.getSource().getPlayer(),StringArgumentType.getString(c,"itemName")))));
     }
