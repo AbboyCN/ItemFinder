@@ -1,9 +1,9 @@
 package com.abboycn.itemfinder.commands;
 
+import com.abboycn.itemfinder.commands.tabExecuter.TabexeFindItemPinyin;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.abboycn.itemfinder.searcher.ItemNameMapLoader;
-import com.abboycn.itemfinder.commands.tabExecuter.tabexeFindItemName;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -17,7 +17,7 @@ public class cmdFindItemName {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess registryAccess){
         dispatcher.register(ClientCommandManager.literal("finditemname")
                 .then(argument("itemName", StringArgumentType.greedyString())
-                        .suggests((context,builder)->tabexeFindItemName.fuzzySuggest(builder))
+                        .suggests((context,builder)-> TabexeFindItemPinyin.fuzzySuggestPinyin(builder))
                         .executes(c -> cmdFindItemNameExecuter(c.getSource().getPlayer(),StringArgumentType.getString(c,"itemName")))));
     }
 

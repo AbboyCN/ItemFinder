@@ -17,6 +17,8 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 	// maven { url 'https://masa.dy.fi/maven' }
+	maven { url 'https://jitpack.io' }
+	maven { url 'https://maven.aliyun.com/repository/public' }
 }
 
 loom {
@@ -45,6 +47,9 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	implementation 'com.belerweb:pinyin4j:2.5.1'
+	include 'com.belerweb:pinyin4j:2.5.1'
 }
 
 processResources {
