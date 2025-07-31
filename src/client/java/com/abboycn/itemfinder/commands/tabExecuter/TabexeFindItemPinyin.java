@@ -14,7 +14,6 @@ public class TabexeFindItemPinyin {
         Multimap<String, String> itemPinyinMap = ItemNameMapLoader.getItemPinyinMap();
         List<String> itemNames = ItemNameMapLoader.getItemNameTabList();
 
-        // 创建三个独立列表保持优先级顺序
         List<String> exactMatches = new ArrayList<>(itemPinyinMap.get(input));
         List<String> startsWithMatches = new ArrayList<>();
 
