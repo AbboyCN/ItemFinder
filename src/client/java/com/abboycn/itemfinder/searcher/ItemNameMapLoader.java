@@ -17,6 +17,8 @@ public class ItemNameMapLoader {
 
     public static void load(){
         itemMap.clear();
+        itemNameTabList.clear();
+        itemPinyinMap.clear();
         for(Item item: Registries.ITEM){
             String itemName = item.getName().getString();
             itemMap.put(itemName,item);

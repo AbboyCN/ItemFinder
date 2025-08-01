@@ -5,16 +5,16 @@
 	"name": "ItemFinder",
 	"description": "不要再在全物品里迷路啦~(TTS专用)",
 	"authors": [
-		"Ab_boy_CN"
+		"Ab_boy_CN",
+		"tifisht"
 	],
 	"contributors": [
 		"Nk_YMZ",
-		"S12004186",
-		"moyuing"
+		"S12004186"
 	],
 	"contact": {
-		"homepage": "https://github.com/AbboyCN",
-		"sources": "https://github.com/AbboyCN/ItemFinder"
+		"homepage": "https://github.com/AbboyCN/ItemFinder",
+		"sources": "https://github.com/AbboyCN/ItemFinder/tree/master/src"
 	},
 	"license": "MIT",
 	"icon": "assets/itemfinder/icon.png",

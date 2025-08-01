@@ -22,6 +22,7 @@ public class ZoneLoader {
     }
 
     public static void load() {
+        LOADED_ZONES.clear();
         try (InputStream in = ZoneLoader.class.getResourceAsStream("/assets/itemfinder/zones/searchZones.json")) {
             if (in == null) {
                 throw new RuntimeException("File lost!");

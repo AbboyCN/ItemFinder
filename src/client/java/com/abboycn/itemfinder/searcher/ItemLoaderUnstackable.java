@@ -23,6 +23,7 @@ public class ItemLoaderUnstackable {
     }
 
     public static void load() {
+        LOADED_Categories.clear();
         try (InputStream in = ItemLoaderUnstackable.class.getResourceAsStream("/assets/itemfinder/items/unstackableItems.json")) {
             if (in == null) {
                 throw new RuntimeException("Could not find unstackableItems.json");
