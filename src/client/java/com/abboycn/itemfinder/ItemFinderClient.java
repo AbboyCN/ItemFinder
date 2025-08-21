@@ -1,7 +1,7 @@
 package com.abboycn.itemfinder;
 
 import com.abboycn.itemfinder.commands.*;
-import com.abboycn.itemfinder.render.beamRender;
+import com.abboycn.itemfinder.render.*;
 import com.abboycn.itemfinder.searcher.ItemLoaderUnstackable;
 import com.abboycn.itemfinder.searcher.ItemNameMapLoader;
 import com.abboycn.itemfinder.searcher.ZoneLoader;
@@ -41,7 +41,8 @@ public class ItemFinderClient implements ClientModInitializer {
 		// 注册光柱渲染器(每刻渲染光柱)
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (client.world != null) {
-				beamRender.render(client.world);
+				beamRender.update(client.world);
+				shulkerRender.update(client.world);
 			}
 		});
 	}

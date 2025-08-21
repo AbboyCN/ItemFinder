@@ -1,5 +1,6 @@
 package com.abboycn.itemfinder;
 
+import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -20,5 +21,7 @@ public class ItemFinder implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Successfully Loaded ItemFinder Mod!");
+
+
 	}
 }

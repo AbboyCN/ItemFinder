@@ -24,7 +24,7 @@ public class beamRender {
         positions.forEach(pos -> activeBeams.put(pos.toImmutable(), time));
     }
 
-    public static void render(ClientWorld world) {
+    public static void update(ClientWorld world) {
         long now = System.currentTimeMillis();
         Iterator<Map.Entry<BlockPos, Long>> it = activeBeams.entrySet().iterator();
 

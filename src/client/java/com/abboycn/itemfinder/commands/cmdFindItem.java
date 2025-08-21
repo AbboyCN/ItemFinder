@@ -1,6 +1,6 @@
 package com.abboycn.itemfinder.commands;
 
-import com.abboycn.itemfinder.render.beamRender;
+import com.abboycn.itemfinder.render.*;
 import com.abboycn.itemfinder.searcher.ItemSearcher;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
@@ -56,6 +56,8 @@ public class cmdFindItem {
         }
         // 更新光柱
         beamRender.addBeams(foundModified);
+        //shulkerRender.addMarkers(foundModified);
+
         return 1;
     }
 
