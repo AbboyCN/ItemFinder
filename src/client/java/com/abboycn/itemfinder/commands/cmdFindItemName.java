@@ -1,6 +1,7 @@
 package com.abboycn.itemfinder.commands;
 
 import com.abboycn.itemfinder.commands.tabExecuter.TabexeFindItemPinyin;
+import com.abboycn.itemfinder.commands.tabExecuter.UnsortedSuggestionsBuilder;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.abboycn.itemfinder.searcher.ItemNameMapLoader;
@@ -17,7 +18,7 @@ public class cmdFindItemName {
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess registryAccess){
         dispatcher.register(ClientCommandManager.literal("finditemname")
                 .then(argument("itemName", StringArgumentType.greedyString())
-                        .suggests((context,builder)-> TabexeFindItemPinyin.fuzzySuggestPinyin(builder))
+                        .suggests((context,builder)-> TabexeFindItemPinyin.fuzzySuggestPinyin(new UnsortedSuggestionsBuilder(builder)))
                         .executes(c -> cmdFindItemNameExecuter(c.getSource().getPlayer(),StringArgumentType.getString(c,"itemName")))));
     }
 
