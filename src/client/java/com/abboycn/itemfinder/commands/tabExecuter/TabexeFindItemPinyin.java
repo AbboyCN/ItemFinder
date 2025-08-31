@@ -2,7 +2,6 @@ package com.abboycn.itemfinder.commands.tabExecuter;
 
 import com.google.common.collect.Multimap;
 import com.mojang.brigadier.suggestion.Suggestions;
-import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import com.abboycn.itemfinder.searcher.ItemNameMapLoader;
 
 import java.util.*;
