@@ -28,21 +28,16 @@ public class ItemFinderClient implements ClientModInitializer {
 		ItemLoaderUnstackable.load();
 		LOGGER.info("Loaded unstackable items!");
 		//注册命令
-		ClientCommandRegistrationCallback.EVENT.register((dispatcher,
-														  registryAccess)->cmdFindItem.register(dispatcher,registryAccess));
-		ClientCommandRegistrationCallback.EVENT.register((dispatcher,
-														  registryAccess)->cmdFI.register(dispatcher,registryAccess));
-		ClientCommandRegistrationCallback.EVENT.register((dispatcher,
-														  registryAccess)->cmdFindItemName.register(dispatcher,registryAccess));
-		ClientCommandRegistrationCallback.EVENT.register((dispatcher,
-														  registryAccess)->cmdFN.register(dispatcher,registryAccess));
-		ClientCommandRegistrationCallback.EVENT.register((dispatcher,
-														  registryAccess)->cmdItemFinder.register(dispatcher,registryAccess));
+		ClientCommandRegistrationCallback.EVENT.register(cmdFindItem::register);
+		ClientCommandRegistrationCallback.EVENT.register(cmdFI::register);
+		ClientCommandRegistrationCallback.EVENT.register((d,r)->cmdFindItemName.register(d));
+		ClientCommandRegistrationCallback.EVENT.register((d,r)->cmdFN.register(d));
+		ClientCommandRegistrationCallback.EVENT.register((d,r)->cmdItemFinder.register(d));
 		// 注册光柱渲染器(每刻渲染光柱)
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (client.world != null) {
 				beamRender.update(client.world);
-				shulkerRender.update(client.world);
+				shulkerRender.update();
 			}
 		});
 	}

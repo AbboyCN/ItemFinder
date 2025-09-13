@@ -6,23 +6,19 @@ import net.minecraft.entity.mob.ShulkerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 public class shulkerRender {
+    public static final String MOD_ID = "itemfinder";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     private static final Map<BlockPos, ShulkerMarker> activeMarkers = new HashMap<>();
     private static final int DURATION_MS = 30000; // 30秒
 
     // 潜影贝标记数据类
-    private static class ShulkerMarker {
-        public final long spawnTime;
-        public final ShulkerEntity shulkerEntity;
-
-        public ShulkerMarker(long spawnTime, ShulkerEntity shulkerEntity) {
-            this.spawnTime = spawnTime;
-            this.shulkerEntity = shulkerEntity;
-        }
-    }
+        private record ShulkerMarker(long spawnTime, ShulkerEntity shulkerEntity) {}
 
     public static void clearAll() {
         // 移除所有潜影贝实体
@@ -51,7 +47,7 @@ public class shulkerRender {
         }
     }
 
-    public static void update(ClientWorld world) {
+    public static void update() {
         long now = System.currentTimeMillis();
         Iterator<Map.Entry<BlockPos, ShulkerMarker>> it = activeMarkers.entrySet().iterator();
 
@@ -63,11 +59,8 @@ public class shulkerRender {
             if (now - marker.spawnTime > DURATION_MS) {
                 marker.shulkerEntity.discard();
                 it.remove();
-                continue;
+                //continue;
             }
-//
-//            // 更新潜影贝效果（例如脉动效果）
-//            updateShulkerEffects(marker.shulkerEntity, marker.spawnTime, now);
         }
     }
 
@@ -88,43 +81,37 @@ public class shulkerRender {
         shulker.setNoGravity(true);
 
         // 设置效果
-        shulker.addStatusEffect(new StatusEffectInstance(//发光
-                StatusEffects.GLOWING,
-                Integer.MAX_VALUE,
-                1,
-                false,
-                false
-        ));
-        shulker.addStatusEffect(new StatusEffectInstance(//隐身
-                StatusEffects.INVISIBILITY,
-                Integer.MAX_VALUE,
-                1,
-                false,
-                false
-        ));
+        shulker.setGlowing(true);
+        shulker.setInvisible(true);
+        if(shulker.isGlowingLocal()) {
+            LOGGER.info("The shulker is not glowing,retrying...");
+            shulker.addStatusEffect(new StatusEffectInstance(//发光
+                    StatusEffects.GLOWING,
+                    Integer.MAX_VALUE,
+                    1,
+                    false,
+                    false
+            ));
+        }
+        if(shulker.isInvisible()) {
+            LOGGER.info("The shulker is not invisible,retrying...");
+            shulker.addStatusEffect(new StatusEffectInstance(//隐身
+                    StatusEffects.INVISIBILITY,
+                    Integer.MAX_VALUE,
+                    1,
+                    false,
+                    false
+            ));
+        }
+        if(!(shulker.isInvisible()||shulker.isGlowingLocal())) {
+            LOGGER.warn("The shulker can not be effected,deleted!");
+            shulker.setHealth(0);
+        }
 
         return shulker;
     }
 
-//    private static void updateShulkerEffects(ShulkerEntity shulker, long spawnTime, long currentTime) {
-//        float progress = (currentTime - spawnTime) / 1000f; // 转换为秒
-//        double yOffset = Math.sin(progress * 2) * 0.05; // 缓慢上下浮动
-//
-//        shulker.setPosition(shulker.getX(), shulker.getY() + yOffset, shulker.getZ());
-//    }
-
     private static ClientWorld getClientWorld() {
         return net.minecraft.client.MinecraftClient.getInstance().world;
-    }
-
-    // 获取当前活跃的标记数量（用于调试）
-    public static int getActiveMarkerCount() {
-        return activeMarkers.size();
-    }
-
-    // 获取特定位置的标记（如果需要交互）
-    public static ShulkerEntity getMarkerAt(BlockPos pos) {
-        ShulkerMarker marker = activeMarkers.get(pos.toImmutable());
-        return marker != null ? marker.shulkerEntity : null;
     }
 }

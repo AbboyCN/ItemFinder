@@ -18,6 +18,8 @@ public class TabexeFindItemPinyin {
         List<String> containsMatches = new ArrayList<>();
 
         itemPinyinMap.asMap().forEach((pinyin, items) -> {
+            if(pinyin == null)
+                return;
             if (pinyin.equals(input))
                 exactMatches.addAll(items);
             else if (pinyin.startsWith(input))

@@ -13,13 +13,7 @@ import java.util.List;
 public class ZoneLoader {
     private static final List<Zone> LOADED_ZONES = new ArrayList<>();
 
-    public static class Zone {
-        public final Box box;
-
-        public Zone(Box box) {
-            this.box = box;
-        }
-    }
+    public record Zone(Box box) {}
 
     public static void load() {
         LOADED_ZONES.clear();

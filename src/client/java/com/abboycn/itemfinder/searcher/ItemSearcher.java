@@ -33,8 +33,8 @@ public class ItemSearcher {
         // 检查方块实体（花盆）
         for (ZoneLoader.Zone zone : ZoneLoader.getZones()) {
             for (BlockPos pos : BlockPos.iterate(
-                    (int)zone.box.minX, (int)zone.box.minY, (int)zone.box.minZ,
-                    (int)zone.box.maxX, (int)zone.box.maxY, (int)zone.box.maxZ
+                    (int) zone.box().minX, (int) zone.box().minY, (int) zone.box().minZ,
+                    (int) zone.box().maxX, (int) zone.box().maxY, (int) zone.box().maxZ
             )) {
                 BlockState state = world.getBlockState(pos);
                 if (state.getBlock() instanceof FlowerPotBlock){
@@ -48,8 +48,8 @@ public class ItemSearcher {
         for (Entity entity : world.getEntities()) {
             for (ZoneLoader.Zone zone : ZoneLoader.getZones()) {
                 for (BlockPos pos : BlockPos.iterate(
-                        (int)zone.box.minX, (int)zone.box.minY, (int)zone.box.minZ,
-                        (int)zone.box.maxX, (int)zone.box.maxY, (int)zone.box.maxZ
+                        (int) zone.box().minX, (int) zone.box().minY, (int) zone.box().minZ,
+                        (int) zone.box().maxX, (int) zone.box().maxY, (int) zone.box().maxZ
                 )) {
                     if (entity instanceof ItemFrameEntity frame &&
                             frame.getHeldItemStack().getItem() == target &&
@@ -63,8 +63,8 @@ public class ItemSearcher {
         // 检查普通方块
         for (ZoneLoader.Zone zone : ZoneLoader.getZones()) {
             for (BlockPos pos : BlockPos.iterate(
-                    (int)zone.box.minX, (int)zone.box.minY, (int)zone.box.minZ,
-                    (int)zone.box.maxX, (int)zone.box.maxY, (int)zone.box.maxZ
+                    (int) zone.box().minX, (int) zone.box().minY, (int) zone.box().minZ,
+                    (int) zone.box().maxX, (int) zone.box().maxY, (int) zone.box().maxZ
             )) {
                 if (world.getBlockState(pos).getBlock().asItem() == target) {
                     results.add(pos.toImmutable());

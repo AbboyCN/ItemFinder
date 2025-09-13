@@ -25,11 +25,9 @@ public class UnsortedSuggestionsBuilder extends SuggestionsBuilder {
     }
 
     public SuggestionsBuilder suggest(String text) {
-        if (text.equals(this.getRemaining())) {
-            return this;
-        } else {
+        if (!text.equals(this.getRemaining())) {
             this.unsortedResult.add(new Suggestion(StringRange.between(this.getStart(), this.getInput().length()), text));
-            return this;
         }
+        return this;
     }
 }

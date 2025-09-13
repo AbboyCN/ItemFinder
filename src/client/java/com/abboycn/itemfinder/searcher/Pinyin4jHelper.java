@@ -41,9 +41,4 @@ public class Pinyin4jHelper {
     public static boolean isChinese(char c) {
         return String.valueOf(c).matches("[\\u4E00-\\u9FA5]");
     }
-
-    //判断字符串是否包含中文
-    public static boolean containsChinese(String str) {
-        return str.chars().anyMatch(c -> isChinese((char) c));
-    }
 }

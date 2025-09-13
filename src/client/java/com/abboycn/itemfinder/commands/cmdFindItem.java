@@ -56,7 +56,7 @@ public class cmdFindItem {
         }
         // 更新光柱
         beamRender.addBeams(foundModified);
-        //shulkerRender.addMarkers(foundModified);
+        shulkerRender.addMarkers(foundModified);
 
         return 1;
     }

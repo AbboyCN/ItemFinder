@@ -8,14 +8,13 @@ import com.abboycn.itemfinder.searcher.ItemNameMapLoader;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.item.Item;
 
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
 
 public class cmdFindItemName {
-    public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess registryAccess){
+    public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher){
         dispatcher.register(ClientCommandManager.literal("finditemname")
                 .then(argument("itemName", StringArgumentType.greedyString())
                         .suggests((context,builder)-> TabexeFindItemPinyin.fuzzySuggestPinyin(new UnsortedSuggestionsBuilder(builder)))
