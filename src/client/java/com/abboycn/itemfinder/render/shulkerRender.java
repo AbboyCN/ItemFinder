@@ -41,6 +41,12 @@ public class shulkerRender {
             // 创建潜影贝实体
             ShulkerEntity shulker = createShulkerMarker(world, immutablePos);
 
+            //检查效果是否添加成功
+            if((!shulker.isInvisible())||(!shulker.isGlowingLocal())) {
+                LOGGER.warn("The shulker can not be effected,deleted!");
+                time-=DURATION_MS;
+            }
+
             // 添加到世界和管理器
             world.addEntity(shulker);
             activeMarkers.put(immutablePos, new ShulkerMarker(time, shulker));
@@ -81,31 +87,27 @@ public class shulkerRender {
         shulker.setNoGravity(true);
 
         // 设置效果
-        shulker.setGlowing(true);
-        shulker.setInvisible(true);
-        if(shulker.isGlowingLocal()) {
+        if(!shulker.isGlowingLocal()) {
             LOGGER.info("The shulker is not glowing,retrying...");
             shulker.addStatusEffect(new StatusEffectInstance(//发光
                     StatusEffects.GLOWING,
                     Integer.MAX_VALUE,
-                    1,
+                    2,
+                    true,
                     false,
                     false
             ));
         }
-        if(shulker.isInvisible()) {
+        if(!shulker.isInvisible()) {
             LOGGER.info("The shulker is not invisible,retrying...");
             shulker.addStatusEffect(new StatusEffectInstance(//隐身
                     StatusEffects.INVISIBILITY,
                     Integer.MAX_VALUE,
-                    1,
+                    2,
+                    true,
                     false,
                     false
             ));
-        }
-        if(!(shulker.isInvisible()||shulker.isGlowingLocal())) {
-            LOGGER.warn("The shulker can not be effected,deleted!");
-            shulker.setHealth(0);
         }
 
         return shulker;
